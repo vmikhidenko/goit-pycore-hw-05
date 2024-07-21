@@ -47,12 +47,12 @@ end = time.time()
 print("Time taken to execute function with cache (second run):", end - begin)
 
 begin = time.time()
-print(fib_cached(20))
+print(fib_cached(15))
 end = time.time()
 print("Time taken to execute function with cache:", end - begin)
 
 begin = time.time()
-print(fib_cached(20))
+print(fib_cached(15))
 end = time.time()
 print("Time taken to execute function with cache (second run):", end - begin)
 
@@ -69,11 +69,11 @@ end = time.time()
 print("Time taken to execute function without cache (second run):", end - begin)
 
 begin = time.time()
-print(fib_not_cached(20))
+print(fib_not_cached(15))
 end = time.time()
 print("Time taken to execute function without cache:", end - begin)
 
 begin = time.time()
-print(fib_not_cached(20))
+print(fib_not_cached(15))
 end = time.time()
 print("Time taken to execute function without cache (second run):", end - begin)
