@@ -3,7 +3,11 @@ from pathlib import Path
 import re
 
 def parse_log_line(line: str) -> dict:
-    pattern = r'^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) (\w+) (.+)$' #  setting pattern to recognize message format
+    """
+    Parses a single log line into a dictionary containing timestamp, log level, and message.
+    Raises ValueError if the log line does not match the expected format.
+    """
+    pattern = r'^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) (\w+) (.+)$'
     match = re.match(pattern, line)
     if match:
         timestamp = match.group(1)
@@ -17,7 +21,12 @@ def parse_log_line(line: str) -> dict:
     else:
         raise ValueError(f"Invalid log line format: {line}")
 
-def load_logs(file_path: str) -> list:  #   extracting and storing timestamp, log level, and message in the dictionary
+def load_logs(file_path: str) -> list:
+    """
+    Loads log entries from a file specified by file_path.
+    Returns a list of parsed log dictionaries.
+    Handles file not found errors.
+    """
     logs = []
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
@@ -34,11 +43,18 @@ def load_logs(file_path: str) -> list:  #   extracting and storing timestamp, lo
     return logs
 
 def filter_logs_by_level(logs: list, level: str) -> list:
+    """
+    Filters logs by a specified log level.
+    Returns a list of log dictionaries that match the specified level.
+    """
     return [log for log in logs if log["level"] == level]
 
 def count_logs_by_level(logs: list) -> dict:
-    log_counts = {}    #  Returns a filtered list of log entries (dictionaries) where each log has a level key that matches with specified level
-
+    """
+    Counts occurrences of each log level in the logs list.
+    Returns a dictionary where keys are log levels and values are counts.
+    """
+    log_counts = {}
     for log in logs:
         level = log["level"]
         if level in log_counts:
@@ -48,7 +64,9 @@ def count_logs_by_level(logs: list) -> dict:
     return log_counts
 
 def display_log_counts(counts: dict, logs: list, detailed_level: str = None):
-    #   prints header in a format given in exercise
+    """
+    Displays log counts summary and optionally detailed logs for a specific log level.
+    """
     print("Рівень логування | Кількість")
     print("-----------------|----------")
     total = sum(counts.values())
@@ -72,7 +90,3 @@ if __name__ == "__main__":
     parsed_logs = load_logs(log_file)
     log_counts = count_logs_by_level(parsed_logs)
     display_log_counts(log_counts, parsed_logs, detailed_level=log_level)
-
-
-# script check: 
-# python3 /Users/volodymyrmikhidenko/Documents/HW05/goit-pycore-hw-05/ex03/main.py /Users/volodymyrmikhidenko/Documents/HW05/goit-pycore-hw-05/ex03/basic.log error
