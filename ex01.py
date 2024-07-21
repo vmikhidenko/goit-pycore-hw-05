@@ -19,6 +19,6 @@ fib = caching_fibonacci() # extracting fibonacci function
 # using the function to calculate Fibonacci numbers
 print(fib(12))
 print(fib(5))  
-print(fib(10))  
+print(fib(10)) # with using cahing every next calculation is stored in memory (cache)
 print(fib(20))     
 
