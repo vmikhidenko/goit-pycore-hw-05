@@ -8,7 +8,7 @@ def parse_input(user_input):
         args = args[0].split()
     return cmd, args
 
-def input_error(func):
+def input_error(func):  #wrapping function
     def inner(*args, **kwargs):
         try:
             return func(*args, **kwargs)
@@ -53,7 +53,7 @@ def main():
         else:
             print("Invalid command.")
 
-@input_error
+@input_error    #implemented
 def add_contact(args, contacts):
     if len(args) < 2:
         raise ValueError("Give me name and phone please.")
@@ -64,20 +64,20 @@ def add_contact(args, contacts):
     save_contacts(contacts)  # Save contacts to dict.json after adding
     return "Contact added."
 
-@input_error
+@input_error   #implemented
 def show_phone(name, contacts):
     if name in contacts:
         print(f"{name}: {contacts[name]}")
     else:
         print(f"Contact {name} not found.")
 
-@input_error
+@input_error   #implemented
 def show_all(contacts):
     print("All saved contacts:")
     for name, phone in contacts.items():
         print(f"{name}: {phone}")
 
-@input_error
+@input_error    #implemented
 def change_contact(args, contacts):
     if len(args) < 2:
         raise IndexError("Enter user name.")
